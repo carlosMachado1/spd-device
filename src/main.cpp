@@ -59,7 +59,6 @@ void loop()
     delay(500);
     digitalWrite(BUILTIN_LED, HIGH);
     delay(500);
-    tagId = "";
 
     scale.set_scale(calibration_factor);
     weight = scale.get_units(5);
@@ -79,9 +78,10 @@ void loop()
     {
       HTTPClient http;
       // sprintf(REQ_URL, "http://jsonplaceholder.typicode.com/todos/1", SERVER_BASE_URL);
-      Serial.println("http://ip:3000/item");
-      http.begin("http://ip:3000/item");
-      int http_code = http.GET();
+      Serial.println("http://ip:3000/item/update");
+      http.begin("http://ip:3000/item/update");
+      http.addHeader("Content-Type", "application/json");
+      int http_code = http.POST({tagId, weight});
       if (http_code > 0)
       {
         String payload = http.getString();
@@ -93,6 +93,8 @@ void loop()
         Serial.println("Error on HTTP request");
       }
       delay(3000);
+      http.end
     }
   }
+  tagId = "";
 }
