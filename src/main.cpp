@@ -23,7 +23,7 @@ void setup(void)
   Serial.begin(115200);
   Serial.println("System initialized");
 
-  WiFi.begin("LOUREIRO17_2G", "114326PR");
+  WiFi.begin("name_internet", "passoword");
   while (WiFi.status() != WL_CONNECTED)
   {
     delay(1000);
